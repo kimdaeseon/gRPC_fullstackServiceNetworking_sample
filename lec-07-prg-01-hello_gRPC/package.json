@@ -1,0 +1,16 @@
+{
+  "name": "lec-07-prg-01-hello_grpc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.4.4",
+    "google-protobuf": "^3.19.1"
+  }
+}

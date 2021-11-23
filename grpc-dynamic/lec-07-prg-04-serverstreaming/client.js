@@ -11,10 +11,10 @@ let packageDefinition = protoLoader.loadSync(
      defaults: true,
      oneofs: true
     });
-let employee_proto = grpc.loadPackageDefinition(packageDefinition).serverstreaming;
+let serverstreaming_proto = grpc.loadPackageDefinition(packageDefinition).serverstreaming;
 
 function main() {
-  let client = new employee_proto.ServerStreaming('localhost:50051',grpc.credentials.createInsecure());
+  let client = new serverstreaming_proto.ServerStreaming('localhost:50051',grpc.credentials.createInsecure());
   const call = client.GetServerResponse({message:"start"})
   call.on('data',function(response){
     console.log("[server to client]", response.message.toString())

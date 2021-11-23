@@ -13,7 +13,7 @@ let packageDefinition = protoLoader.loadSync(
     defaults: true,
     oneofs: true
   });
-let employee_proto = grpc.loadPackageDefinition(packageDefinition)
+let clientstreaming_proto = grpc.loadPackageDefinition(packageDefinition)
 
 function getServerResponse(call, callback){
 
@@ -28,7 +28,7 @@ function getServerResponse(call, callback){
 }
 function main() {
   let server = new grpc.Server();
-  server.addService(employee_proto.clientstreaming.ClientStreaming.service, 
+  server.addService(clientstreaming_proto.clientstreaming.ClientStreaming.service, 
     { getServerResponse: getServerResponse}
   );
   server.bind('localhost:50051', grpc.ServerCredentials.createInsecure());

@@ -13,7 +13,7 @@ let packageDefinition = protoLoader.loadSync(
     defaults: true,
     oneofs: true
   });
-let employee_proto = grpc.loadPackageDefinition(packageDefinition)
+let bidirectional_proto = grpc.loadPackageDefinition(packageDefinition)
 
 function getServerResponse(call){
   console.log("Server processing gRPC bidirectional streaming.")
@@ -24,7 +24,7 @@ function getServerResponse(call){
 
 function main() {
   let server = new grpc.Server();
-  server.addService(employee_proto.bidirectional.Bidirectional.service, 
+  server.addService(bidirectional_proto.bidirectional.Bidirectional.service, 
     { getServerResponse: getServerResponse}
   );
   server.bind('localhost:50051', grpc.ServerCredentials.createInsecure());

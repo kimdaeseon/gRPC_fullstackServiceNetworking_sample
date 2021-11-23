@@ -11,7 +11,7 @@ let packageDefinition = protoLoader.loadSync(
      defaults: true,
      oneofs: true
     });
-let employee_proto = grpc.loadPackageDefinition(packageDefinition).clientstreaming;
+let clientstreaming_proto = grpc.loadPackageDefinition(packageDefinition).clientstreaming;
 
 const generate_message = ()=>{
   return [
@@ -33,7 +33,7 @@ const send_messages = (call)=>{
 }
 
 function main() {
-  let client = new employee_proto.ClientStreaming('localhost:50051',grpc.credentials.createInsecure());
+  let client = new clientstreaming_proto.ClientStreaming('localhost:50051',grpc.credentials.createInsecure());
   const call = client.GetServerResponse(function(err,response){
     console.log(response.value)
   })

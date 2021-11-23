@@ -11,7 +11,7 @@ let packageDefinition = protoLoader.loadSync(
      defaults: true,
      oneofs: true
     });
-let employee_proto = grpc.loadPackageDefinition(packageDefinition).bidirectional;
+let bidirectional_proto = grpc.loadPackageDefinition(packageDefinition).bidirectional;
 
 const generate_message = ()=>{
   return [
@@ -33,7 +33,7 @@ const send_messages = (call)=>{
 }
 
 function main() {
-  let client = new employee_proto.Bidirectional('localhost:50051',grpc.credentials.createInsecure());
+  let client = new bidirectional_proto.Bidirectional('localhost:50051',grpc.credentials.createInsecure());
   const call = client.GetServerResponse()
   send_messages(call)
   call.on('data',function(response){

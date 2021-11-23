@@ -1,4 +1,4 @@
-const PROTO_PATH = __dirname + '/bidirectional.proto';
+const PROTO_PATH = __dirname + '/clientstreaming.proto';
 
 var grpc = require('grpc');
 const protoLoader = require('@grpc/proto-loader');
@@ -11,7 +11,7 @@ let packageDefinition = protoLoader.loadSync(
      defaults: true,
      oneofs: true
     });
-let employee_proto = grpc.loadPackageDefinition(packageDefinition).bidirectional;
+let employee_proto = grpc.loadPackageDefinition(packageDefinition).clientstreaming;
 
 const generate_message = ()=>{
   return [
@@ -33,11 +33,13 @@ const send_messages = (call)=>{
 }
 
 function main() {
-  let client = new employee_proto.Bidirectional('localhost:50051',grpc.credentials.createInsecure());
-  const call = client.GetServerResponse()
+  let client = new employee_proto.ClientStreaming('localhost:50051',grpc.credentials.createInsecure());
+  const call = client.GetServerResponse(function(err,response){
+    console.log(response.value)
+  })
   send_messages(call)
   call.on('data',function(response){
-    console.log("[server to client]", response.message.toString())
+    console.log("[server to client]", response.value.toString())
   });
 }
 

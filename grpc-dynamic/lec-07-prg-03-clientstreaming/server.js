@@ -16,13 +16,14 @@ let packageDefinition = protoLoader.loadSync(
 let clientstreaming_proto = grpc.loadPackageDefinition(packageDefinition)
 
 function getServerResponse(call, callback){
-
+    let count = 0
     call.on('data',function(message){
+        count += 1
         console.log(message.message.toString())
     });
     call.on('end',function(){
         callback(null,{
-            value: 5
+            value: count
         })
     })
 }
